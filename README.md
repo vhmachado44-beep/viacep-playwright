@@ -28,6 +28,12 @@ Os [cenários em Gherkin](features/consulta-cep.feature) descrevem o comportamen
 
 O [Page Object de consulta](pages/ConsultaCep.js) agrupa os campos pelos rótulos visíveis e concentra a ação de informar o CEP e sair do campo. Cada teste começa em um contexto de navegador isolado. A execução usa um worker para fazer uma consulta por vez ao serviço público.
 
+## Integração contínua
+
+O [workflow Testes ViaCEP](https://github.com/vhmachado44-beep/viacep-playwright/actions/workflows/playwright.yml) executa a suíte em Chromium a cada push na `main` e em pull requests destinados a essa branch. Para iniciar uma execução manual, abra o workflow e clique em **Run workflow**.
+
+Ao final da execução, abra o resumo e baixe **evidencias-viacep** na seção **Artifacts**. O pacote contém o relatório HTML com os screenshots e, em caso de falha no teste, o trace. As evidências ficam disponíveis por 14 dias. Para visualizar o relatório baixado, extraia o ZIP em uma pasta e execute `npx playwright show-report "caminho/da/pasta"` no terminal do projeto.
+
 ## Relatório e evidências
 
 A execução em Chromium registrou 3 cenários aprovados em 7,29 segundos. O [relatório dessa execução](evidencias/relatorio-viacep.html) está incluído no projeto. Para visualizar, abra o arquivo HTML no navegador após baixar o projeto.
