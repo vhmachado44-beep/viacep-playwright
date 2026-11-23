@@ -15,7 +15,7 @@ test('preenche o endereço da Praça da Sé pelo CEP', async ({ page }) => {
   await expect(consulta.ibge).toHaveValue('3550308');
 });
 
-test('avisa quando o CEP tem apenas sete dígitos', async ({ page }) => {
+test('avisa quando o CEP tem apenas sete dígitos', async ({ page }, testInfo) => {
   const consulta = new ConsultaCep(page);
   await consulta.abrir();
 
@@ -26,16 +26,21 @@ test('avisa quando o CEP tem apenas sete dígitos', async ({ page }) => {
   });
   const [mensagem] = await Promise.all([aviso, consulta.consultar('0100100')]);
 
+  await testInfo.attach('Mensagem do alerta', { body: mensagem, contentType: 'text/plain' });
   expect(mensagem).toBe('Formato de CEP inválido.');
   await expect(consulta.rua).toBeEmpty();
 });
 
-test('limpa o endereço anterior ao apagar o CEP', async ({ page }) => {
+test('limpa o endereço anterior ao apagar o CEP', async ({ page }, testInfo) => {
   const consulta = new ConsultaCep(page);
   await consulta.abrir();
   await consulta.consultar(cepDaSe);
   await expect(consulta.rua).toHaveValue('Praça da Sé');
 
+  await testInfo.attach('Endereço antes de apagar o CEP', {
+    body: await page.screenshot(),
+    contentType: 'image/png',
+  });
   await consulta.consultar('');
 
   await expect(consulta.rua).toBeEmpty();

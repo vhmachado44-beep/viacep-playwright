@@ -6,7 +6,7 @@ module.exports = defineConfig({
   reporter: [['list'], ['html', { open: 'never' }]],
   use: {
     baseURL: 'https://viacep.com.br',
-    screenshot: 'only-on-failure',
+    screenshot: 'on',
     trace: 'retain-on-failure',
   },
 });

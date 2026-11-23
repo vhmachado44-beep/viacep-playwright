@@ -38,4 +38,15 @@ Após a execução, abra o relatório HTML:
 npm run report
 ```
 
-Em caso de falha, selecione o teste no relatório para ver a captura de tela e abrir o trace com a sequência de ações. Esses arquivos ficam em `test-results/`.
+Cada execução salva uma captura PNG ao final de cada cenário, inclusive quando passa. O cenário de limpeza também anexa a tela com o endereço preenchido antes de apagar o CEP, para comparação com a tela final. No cenário de CEP incompleto, o texto do alerta nativo fica em um anexo separado. Em caso de falha, o relatório inclui o trace com a sequência de ações.
+
+Abra um cenário no relatório para consultar os anexos. Os arquivos da execução mais recente ficam em `test-results/`.
+
+### Capturas do formulário
+
+| Etapa | Captura |
+| --- | --- |
+| CEP informado antes de sair do campo | [Ver entrada](evidencias/01-cep-informado.jpg) |
+| Endereço retornado para 01001-000 | [Ver endereço](evidencias/02-endereco-preenchido.jpg) |
+| Campos limpos após apagar o CEP | [Ver formulário vazio](evidencias/03-apos-apagar-cep.jpg) |
+| Entrada com sete dígitos, antes do alerta | [Ver CEP incompleto](evidencias/04-cep-incompleto.jpg) |
